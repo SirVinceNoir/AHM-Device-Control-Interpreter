@@ -4,5 +4,8 @@ config.ini
 # Network details contains site-specific information
 Network Details.txt
 
+# Device-specific DCF files (site-specific, not part of the interpreter project)
+Epson-H910B v1.dcf
+
 # macOS
 .DS_Store
