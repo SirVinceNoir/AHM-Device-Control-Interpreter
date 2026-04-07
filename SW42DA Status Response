@@ -52,16 +52,16 @@ Dante Output        Volume     Mute     Delay(Ms)
 Downmix Dante L     0.0dB      Off      0             
 Downmix Dante R     0.0dB      Off      0             
 
-Dante        IP                  Subnet Mask           Gateway              
-7.1CH        169.254.227.003     255.255.000.000       169.254.000.001      
-2CH          169.254.029.222     255.255.000.000       169.254.000.001      
+Dante        IP                  Subnet Mask           Gateway
+7.1CH        169.254.xxx.xxx     255.255.000.000       169.254.000.001
+2CH          169.254.xxx.xxx     255.255.000.000       169.254.000.001
 
-DHCP         IP                  Subnet Mask           Gateway              
-On           010.010.000.102     255.255.255.000       010.010.000.249      
-(static:     192.168.000.200     255.255.255.000       192.168.000.001)     
+DHCP         IP                  Subnet Mask           Gateway
+On           xxx.xxx.xxx.xxx     255.255.255.000       xxx.xxx.xxx.xxx
+(static:     xxx.xxx.xxx.xxx     255.255.255.000       xxx.xxx.xxx.xxx)
 
-Telnet       TCP/IP Port         Mac                   Local                
-0023         8000                34:D0:B8:29:00:48     SW42DA               
+Telnet       TCP/IP Port         Mac                   Local
+0023         8000                xx:xx:xx:xx:xx:xx     SW42DA
 =================================================================================================
 
 SW42DA>
