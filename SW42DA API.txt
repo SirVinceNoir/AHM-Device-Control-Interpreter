@@ -1,0 +1,245 @@
+=================================================================================================
+              HDMI SW42DA Help Info
+              FW Version: V1.1.0k
+
+============= System Information Command
+?                  Print Help Information
+HELP               Print Help Information
+STATUS             Print System Status And Port Status
+FWVER              Print All Soft Version
+UPTIME             Print System Uptime
+TEMP               Print System Temperature
+
+============= System Control Command
+PON                Power On, System Run On Normal State
+POFF               Power Off, System Run On Power Save State
+PWLED FOLLOW ON/OFF ON: Set System Power Led Follow LCD Status
+                   OFF: Set System Power Led Not Follow LCD Status In Power On State,Power Led Always On
+REBOOT             Set System And Network Reboot
+IR ON/OFF          Set System IR Control On Or Off
+IR 5V              Set System IR Is 5V Power Supply Infrared Receiver
+IR 12V             Set System IR Is 12V Power Supply Infrared Receiver
+KEY ON/OFF         Set System KEY Control On Or Off
+BEEP ON/OFF        Set Onboard Beep On Or Off
+LCD ON/OFF         Set LCD Always On Or Set LCD Off After No Operation 30 Seconds
+LCD DSPT x         Set LCD Display Scroll And Pause Time To x(s)
+                   x=[0...10]: Pause Time, Second
+RSB x              Set RS232 Baud Rate To x bps
+                   x=[0:115200 1:57600, 2:38400, 3:19200, 4:9600]
+RESET              Reset System To Default Setting
+RESET ALL          Reset System And Network To Default Setting
+                   (Should Type "Yes" To Confirm, "No" To Discard)
+CEC ON/OFF         Set CEC Volume Control On Or Off
+CEC VC BY xx       Set CEC Volume Control By xx
+                   xx=01: Group
+                   xx=02: Channel
+VOL+xx             Increase System Volume
+                   xx=[01...100]:Steps
+                   xx Can Be Empty(1 Step)
+VOL-xx             Decrease System Volume
+                   xx=[01...100]:Steps
+                   xx Can Be Empty(1 Step)
+VOL xx             Set System Volume Value To xx
+                   xx=[00...100]:Volume Value
+DELAY xx           Set System Delay Time To xx(ms)
+                   xx=[00...50]:Delay Time, Millisecond
+MUTE ON/OFF        Set Mute On Or Off
+MASTER xx ON/OFF   Set Master Output Including/Excluding xx
+                   xx=00: All Output Port
+                   xx=[01]: Multi Channel Line Out
+                   xx=[02]: 2 Channel Line Out
+                   xx=[03]: Multi Channel Dante Out
+                   xx=[04]: 2 Channel Dante Out
+
+============= Input And Output Port Control Command
+IN xx CEC VOL STEPS yy Set CEC Vol Steps
+                   xx=[00...01]:0:ALL,1:ARC
+                   yy=[01...10]:CEC Steps
+OUT xx ON/OFF      Set Output:xx On Or Off
+                   xx=00: Select All Output Port
+                   xx=01: Select HDMI Output Port 1
+                   xx=02: Select HDMI Output Port 2
+                   xx=03: Select Optical Output Port
+OUT xx SCALING yy  Set Output:xx Video Mode yy
+                   xx=02: Select Output 2 Port
+                   yy=[01]: Set Output 2 Port Video Mode Auto
+                   yy=[02]: Set Output 2 Port Video Mode Force 1080p
+                   yy=[03]: Set Output 2 Port Video Mode Bypass
+OUT xx AUDIO yy    Set Output xx Audio To yy
+                   xx=02: Select Output 2 Port
+                   xx=03: Select Optical Output Port
+                   yy=[01]: Bypass
+                   yy=[02]: Downmix 2CH
+OUT FR yy          Set Output From Input:yy
+                   yy=[01]: Select Input 1 Port
+                   yy=[02]: Select Input 2 Port
+                   yy=[03]: Select Input 3 Port
+                   yy=[04]: Select Input 4 Port
+                   yy=[05]: Select ARC Input
+OUT DRC ON/OFF/AUTO  Set DSP Dynamic Range Control (DRC) Mode
+OUT SUD ON/OFF     Set DSP Surround Decoder (Upmixer) On Or Off
+OUT SPV ON/OFF     Set DSP Speaker Virtualizer On Or Off
+OUT MODE yy        Set Audio Output Mode:yy
+                   yy=01: 2.0CH
+                   yy=02: 2.1CH + Top Middle(2.1.2CH)
+                   yy=03: 2.1CH + Top Middle(2.1.2CH) Dolby ATMOS Enabled Speaker
+                   yy=04: 3.1CH
+                   yy=05: 3.1CH + Top Middle(3.1.2CH)
+                   yy=06: 3.1CH + Top Middle(3.1.2CH) Dolby ATMOS Enabled Speaker
+                   yy=07: 4.1CH
+                   yy=08: 4.1CH + Top Middle(4.1.2CH)
+                   yy=09: 4.1CH + Top Middle(4.1.2CH) Dolby ATMOS Enabled Speaker
+                   yy=10: 4.1CH + Top Rear + Top Front(4.1.4CH)
+                   yy=11: 4.1CH + Top Rear + Top Front(4.1.4CH) Front Dolby ATMOS Enabled Speaker
+                   yy=12: 4.1CH + Top Rear + Top Front(4.1.4CH) Rear Dolby ATMOS Enabled Speaker
+                   yy=13: 4.1CH + Top Rear + Top Front(4.1.4CH) Front & Rear Dolby ATMOS Enabled Speaker
+                   yy=14: 5.1CH
+                   yy=15: 5.1CH + Top Middle(5.1.2CH)
+                   yy=16: 5.1CH + Top Middle(5.1.2CH) Dolby ATMOS Enabled Speaker
+                   yy=17: 5.1CH + Top Rear + Top Front(5.1.4CH)
+                   yy=18: 5.1CH + Top Rear + Top Front(5.1.4CH) Front Dolby ATMOS Enabled Speaker
+                   yy=19: 5.1CH + Top Rear + Top Front(5.1.4CH) Rear Dolby ATMOS Enabled Speaker
+                   yy=20: 5.1CH + Top Rear + Top Front(5.1.4CH) Front & Rear Dolby ATMOS Enabled Speaker
+                   yy=21: 6.1CH
+                   yy=22: 6.1CH + Top Middle(6.1.2CH)
+                   yy=23: 6.1CH + Top Middle(6.1.2CH) Dolby ATMOS Enabled Speaker
+                   yy=24: 7.1CH
+                   yy=25: 7.1CH + Top Middle(7.1.2CH)
+                   yy=26: 7.1CH + Top Middle(7.1.2CH) Dolby ATMOS Enabled Speaker
+OUT xx VOL+yy      Increase Output:xx Volume
+                   xx=00: Select All Output Port
+                   xx=01: Multi Channel Line Out L
+                   xx=02: Multi Channel Line Out R
+                   xx=03: Multi Channel Line Out Sub
+                   xx=04: Multi Channel Line Out C
+                   xx=05: Multi Channel Line Out Ls
+                   xx=06: Multi Channel Line Out Rs
+                   xx=07: Multi Channel Line Out Lrs
+                   xx=08: Multi Channel Line Out Rrs
+                   xx=09: 2 Channel Line Out L
+                   xx=10: 2 Channel Line Out R
+                   xx=11: Multi Channel Dante Out L
+                   xx=12: Multi Channel Dante Out R
+                   xx=13: Multi Channel Dante Out Sub
+                   xx=14: Multi Channel Dante Out C
+                   xx=15: Multi Channel Dante Out Ls
+                   xx=16: Multi Channel Dante Out Rs
+                   xx=17: Multi Channel Dante Out Lrs
+                   xx=18: Multi Channel Dante Out Rrs
+                   xx=19: 2 Channel Dante Out L
+                   xx=20: 2 Channel Dante Out R
+                   xx=21: Multi Channel Line Out Group
+                   xx=22: 2 Channel Line Out Group
+                   xx=23: Multi Channel Dante Out Group
+                   xx=24: 2 Channel Dante Out Group
+                   xx=25: Master Out
+                   yy=[1...100]:Steps
+                   yy Can Be Empty (1 Step)
+OUT xx VOL-yy      Decrease Output:xx Volume
+                   xx=Same With Above
+                   yy=[01...100]: Steps
+                   yy Can Be Empty (1 Step)
+OUT xx VOL yy      Set Output:xx Volume Value To yy
+                   xx=Same With Above
+                   yy=[00...100]: Volume Value
+OUT xx MUTE ON/OFF Set Output Mute On Or Off
+                   xx=Same With Above
+OUT xx DELAY yy    Set Output:xx Delay Time To yy(ms)
+                   xx=00: Same With Above
+                   yy=[00...50]: Delay Time, Millisecond
+OUT xx CEC VC ON/OFF  Set Output xx CEC Volume Control On Or Off
+                   xx=Same With Above
+AUDIO xx FR yy     Set Line Output xx Audio From Input yy
+                   xx=01: Select Multi Channel Output Port
+                   xx=02: Select 2 Channel Output Port
+                   yy=[01]: HDMI/ARC Input
+                   yy=[02]: Dante Input
+GROUP zz CHANNEL yy ON/OFF Set GROUP zz Volume Setting Including/Excluding Channel yy
+                   zz=01: Multi Channel Line Out Group
+                   zz=02: 2 Channel Line Out Group
+                   zz=03: Multi Channel Dante Out Group
+                   zz=04: 2 Channel Dante Out Group
+                   yy=[00]: Select All Channels In The Group
+                   (When zz=01: Multi Channel Line Out Group)
+                   yy=[01]: L
+                   yy=[02]: R
+                   yy=[03]: Sub
+                   yy=[04]: C
+                   yy=[05]: Ls
+                   yy=[06]: Rs
+                   yy=[07]: Lrs
+                   yy=[08]: Rrs
+                   (When zz=02: 2 Channel Line Out Group)
+                   yy=[01]: L
+                   yy=[02]: R
+                   (When zz=03: Multi Channel Dante Out Group)
+                   yy=[01]: L
+                   yy=[02]: R
+                   yy=[03]: Sub
+                   yy=[04]: C
+                   yy=[05]: Ls
+                   yy=[06]: Rs
+                   yy=[07]: Lrs
+                   yy=[08]: Rrs
+                   (When zz=04: 2 Channel Dante Out Group)
+                   yy=[01]: L
+                   yy=[02]: R
+EDID xx CP yy      Set Input:xx EDID Copy From Output:yy
+                   xx=00: Select All Input Port
+                   xx=[01...04]: Select One Input Port
+                   yy=[01...02]: Select One Output Port
+EDID xx DF zz      Set Input:xx EDID To Default EDID:zz
+                   xx=00: Select All Input Port
+                   xx=[01...04]: Select One Input Port
+                   zz=00: HDMI 1080p@60Hz, Audio 2CH PCM (Default)
+                   zz=01: HDMI 1080p@60Hz, Audio 5.1CH DTS/DOLBY
+                   zz=02: HDMI 1080p@60Hz, Audio 7.1CH DTS/DOLBY/HD
+                   zz=03: HDMI 1080i@60Hz, Audio 2CH PCM
+                   zz=04: HDMI 1080i@60Hz, Audio 5.1CH DTS/DOLBY
+                   zz=05: HDMI 1080i@60Hz, Audio 7.1CH DTS/DOLBY/HD
+                   zz=06: HDMI 1080p@60Hz/3D, Audio 2CH PCM
+                   zz=07: HDMI 1080p@60Hz/3D, Audio 5.1CH DTS/DOLBY
+                   zz=08: HDMI 1080p@60Hz/3D, Audio 7.1CH DTS/DOLBY/HD
+                   zz=09: HDMI 4K@30Hz 4:4:4, Audio 2CH PCM
+                   zz=10: HDMI 4K@30Hz 4:4:4, Audio 5.1CH DTS/DOLBY
+                   zz=11: HDMI 4K@30Hz 4:4:4, Audio 7.1CH DTS/DOLBY/HD
+                   zz=12: HDMI 4K@60Hz 4:2:0/4K@30Hz 4:4:4, Audio 2CH PCM
+                   zz=13: HDMI 4K@60Hz 4:2:0/4K@30Hz 4:4:4, Audio 5.1CH DTS/DOLBY
+                   zz=14: HDMI 4K@60Hz 4:2:0/4K@30Hz 4:4:4, Audio 7.1CH DTS/DOLBY/HD
+                   zz=15: HDMI 4K@60Hz 4:4:4, 8-bit, Audio 2CH PCM
+                   zz=16: HDMI 4K@60Hz 4:4:4, 8-bit, Audio 5.1CH DTS/DOLBY
+                   zz=17: HDMI 4K@60Hz 4:4:4, 8-bit, Audio 7.1CH DTS/DOLBY/HD
+                   zz=18: HDMI 4K@60Hz 4:4:4, HDR 10-bit, Audio 2CH PCM
+                   zz=19: HDMI 4K@60Hz 4:4:4, HDR 10-bit, Audio 5.1CH DTS/DOLBY
+                   zz=20: HDMI 4K@60Hz 4:4:4, HDR 10-bit, Audio 7.1CH DTS/DOLBY/HD
+                   zz=21: HDMI 4K@60Hz 4:4:4, HDR 12-bit, Audio 2CH PCM
+                   zz=22: HDMI 4K@60Hz 4:4:4, HDR 12-bit, Audio 5.1CH DTS/DOLBY
+                   zz=23: HDMI 4K@60Hz 4:4:4, HDR 12-bit, Audio 7.1CH DTS/DOLBY/HD
+                   zz=24: HDMI 4K@60Hz 4:4:4, HDR 10-bit (Inc DV), Audio 2CH PCM
+                   zz=25: HDMI 4K@60Hz 4:4:4, HDR 10-bit (Inc DV), Audio 5.1CH DTS/DOLBY
+                   zz=26: HDMI 4K@60Hz 4:4:4, HDR 10-bit (Inc DV), Audio 7.1CH DTS/DOLBY/HD
+                   zz=27: HDMI 4K@60Hz 4:4:4, HDR 12-bit (Inc DV), Audio 2CH PCM
+                   zz=28: HDMI 4K@60Hz 4:4:4, HDR 12-bit (Inc DV), Audio 5.1CH DTS/DOLBY
+                   zz=29: HDMI 4K@60Hz 4:4:4, HDR 12-bit (Inc DV), Audio 7.1CH DTS/DOLBY/HD
+                   zz=30: DVI 1280x1024@60Hz, Audio None
+                   zz=31: DVI 1920x1080@60Hz, Audio None
+                   zz=32: DVI 1920x1200@60Hz, Audio None
+                   zz=33: HDMI 1920x1200@60Hz, Audio 2CH PCM/6CH PCM
+                   zz=34: User EDID 1
+                   zz=35: User EDID 2
+                   zz=36: EDID Pass-through (Copy From Sink 1)
+
+============= Network Control Command
+NET DHCP ON/OFF : Set Auto IP(DHCP) On Or Off
+NET IP xxx.xxx.xxx.xxx : Set IP Address
+NET GW xxx.xxx.xxx.xxx : Set Gateway Address
+NET SM xxx.xxx.xxx.xxx : Set Subnet Mask Address
+NET TCPPORT xxxx : Set TCP/IP Port
+NET TCPPORT ON/OFF: Set TCP/IP On Or Off
+NET TN xxxx : Set Telnet Port
+NET TN ON/OFF: Set Telnet On Or Off
+NET RB : Set Network Reboot And Apply New Config!!!
+NET DNS xxxx : Set DNS Domain Name To xxxx
+=================================================================================================
+
+SW42DA>

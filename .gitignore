@@ -1,0 +1,8 @@
+# Local config contains site-specific IP addresses — use config.example.ini as a template
+config.ini
+
+# Network details contains site-specific information
+Network Details.txt
+
+# macOS
+.DS_Store

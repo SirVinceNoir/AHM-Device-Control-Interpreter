@@ -1,0 +1,179 @@
+================================================================================
+  AHM64 Device Control Setup Guide — SW42DA Translation Layer
+================================================================================
+
+OVERVIEW
+--------
+The translator runs on a Raspberry Pi on the same network as the SW42DA.
+The AHM64 connects to the Pi via TCP; the Pi forwards commands to the SW42DA
+via Telnet and returns simple TRUE / FALSE / OK responses the AHM can match.
+
+--------------------------------------------------------------------------------
+STEP 1 — Raspberry Pi Setup
+--------------------------------------------------------------------------------
+
+1. Install Raspberry Pi OS Lite (64-bit recommended) on a micro SD card.
+2. Enable SSH and set a hostname (e.g. "ahm-translator").
+3. Connect the Pi to the network via the wired Ethernet port.
+4. Copy the project files to /home/av/ahm-translator/ on the Pi.
+5. Edit config.ini:
+     sw42da_host  → IP address of the SW42DA
+     ahm_listen_port → port the AHM will connect to (default 8023)
+6. Install the systemd service (see ahm-translator.service for instructions).
+7. Note the Pi's IP address (run: hostname -I).
+
+--------------------------------------------------------------------------------
+STEP 2 — SW42DA Network Setup
+--------------------------------------------------------------------------------
+
+Connect a Telnet client to the SW42DA and confirm TCP is enabled:
+
+  NET TN ON            ← enable Telnet
+  NET TCPPORT ON       ← enable TCP (not strictly needed but good practice)
+  STATUS               ← capture the full output — you will need it for Step 4
+
+Assign the SW42DA a static IP address (either via DHCP reservation on your
+router or by setting it directly with NET IP / NET GW / NET SM commands).
+
+--------------------------------------------------------------------------------
+STEP 3 — AHM64 Device Control — Device Settings
+--------------------------------------------------------------------------------
+
+In AHM System Manager → Configure → Device Control:
+
+  1. Click an empty device slot → Select Mode: TCP
+  2. Device Settings tab:
+       Device Name:       SW42DA (or any name you like)
+       Address:           <Pi's IP address>
+       Port:              8023  (or whatever ahm_listen_port is set to)
+       Timeout (Seconds): 10
+       Keep Connected:    ✓ (ticked)
+       Handshake Type:    No Handshake
+
+--------------------------------------------------------------------------------
+STEP 4 — AHM64 Device Control — Controls
+--------------------------------------------------------------------------------
+
+Each boolean control needs the following fields.  Create one control per
+function you want to use.
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ CONTROL: Input 1 Selected                                                   │
+│   Type:           Boolean                                                   │
+│   Get:            GET INPUT1                                                │
+│   Match True:     TRUE                                                      │
+│   Match False:    FALSE                                                     │
+│   Set True:       SET INPUT1                                                │
+│   Set False:      (leave blank, or SET INPUT2 etc. as appropriate)          │
+│   Match SetOK:    OK                                                        │
+│   Poll (sec):     8                                                         │
+│   Timeout (sec):  10                                                        │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+Repeat the pattern for each control you need:
+
+  FUNCTION           GET string     SET True string    SET False string
+  ─────────────────  ─────────────  ─────────────────  ─────────────────
+  Input 1 active     GET INPUT1     SET INPUT1         —
+  Input 2 active     GET INPUT2     SET INPUT2         —
+  Input 3 active     GET INPUT3     SET INPUT3         —
+  Input 4 active     GET INPUT4     SET INPUT4         —
+  ARC input active   GET ARC        SET ARC            —
+  Power              GET POWER      SET POWER ON       SET POWER OFF
+  Mute               GET MUTE       SET MUTE ON        SET MUTE OFF
+  HDMI Output 1      GET OUTPUT1    SET OUTPUT1 ON     SET OUTPUT1 OFF
+  HDMI Output 2      GET OUTPUT2    SET OUTPUT2 ON     SET OUTPUT2 OFF
+
+  Note: "Input active" means output 01 is currently showing that input.
+  The SW42DA is a 4×2 matrix — output 02 is independently routed but
+  SET INPUT1–4 and SET ARC use "OUT FR" which switches ALL outputs together.
+  Optical output is audio-only and has no enable/disable state in STATUS.
+
+All controls use:
+  Match True:   TRUE
+  Match False:  FALSE
+  Match SetOK:  OK
+
+--------------------------------------------------------------------------------
+STEP 5 — Verify on First Connection
+--------------------------------------------------------------------------------
+
+The STATUS parser has been calibrated against a real SW42DA unit (FW V1.5.0).
+It should work without further adjustment, but verify on first use:
+
+  1. Start the translator service and watch the logs:
+       sudo journalctl -u ahm-translator -f
+
+  2. From the AHM, trigger a GET command (or wait for the poll interval).
+
+  3. If you see "Could not parse X from STATUS response" in the logs, the
+     STATUS format may differ slightly on your firmware version.
+
+  4. To inspect the raw STATUS yourself:
+       telnet <SW42DA IP> 23
+       STATUS
+
+  5. Compare the output against the regex patterns in translator.py
+     (StatusParser class, around line 200) and update if needed.
+
+  The parser was written against this STATUS section format:
+
+    Power   IR   IR_Mode ...          ← power header
+    On      On   5v      ...          ← power = first token
+
+    Output     FromIn     HDMIcon     OutputEn  ...   ← output header
+    01         02         On          Yes        ...   ← output 01 state
+    02         02         Off         Yes        ...   ← output 02 state
+
+    Master Output     Mute  ...       ← master mute header
+    100               Off   ...       ← mute = second token
+
+--------------------------------------------------------------------------------
+STEP 6 — Monitoring
+--------------------------------------------------------------------------------
+
+On the Pi:
+
+  sudo systemctl status ahm-translator          # quick health check
+  sudo journalctl -u ahm-translator -f          # live log stream
+
+Normal startup log looks like:
+
+  INFO  AHM64 ↔ SW42DA Translator starting…
+  INFO    AHM listen : 0.0.0.0:8023
+  INFO    SW42DA     : 192.168.1.100:23
+  INFO  Connected to SW42DA at 192.168.1.100:23
+  INFO  Listening for AHM64 on 0.0.0.0:8023
+
+When the AHM connects and polls:
+
+  INFO  AHM64 connected from ('192.168.1.x', 12345)
+  INFO  AHM → 'GET INPUT1'
+  INFO  AHM ← 'FALSE'
+  INFO  AHM → 'SET INPUT1'
+  INFO  AHM ← 'OK'
+
+--------------------------------------------------------------------------------
+TROUBLESHOOTING
+--------------------------------------------------------------------------------
+
+Problem: AHM shows device as offline / not responding
+  → Check the Pi is reachable: ping <Pi IP> from a computer on the same network
+  → Check the service is running: sudo systemctl status ahm-translator
+  → Verify AHM Device Settings: Address, Port, Handshake Type = No Handshake
+
+Problem: Controls always show FALSE / ERROR:PARSE
+  → The STATUS parser needs calibrating — see Step 4 above
+  → Enable DEBUG logging in config.ini (log_level = DEBUG) to see raw responses
+
+Problem: SW42DA not responding to commands
+  → Confirm Telnet is enabled on the SW42DA (NET TN ON)
+  → Confirm the correct IP and port are set in config.ini
+  → Try connecting manually: telnet <SW42DA IP> 23
+
+Problem: Service won't start after reboot
+  → Check network is up before the service starts (the unit file already uses
+    network-online.target — ensure systemd-networkd-wait-online is enabled)
+  → sudo systemctl enable systemd-networkd-wait-online
+
+================================================================================

@@ -1,0 +1,67 @@
+
+=================================================================================================
+              HDMI SW42DA Status
+              FW Version: V1.5.0
+
+Power   IR   IR_Mode   Key   Beep   LCD   LCD_PauseTime(S)   PWLED_Follow   Network   Baud     Temp(C)   Uptime(Day:Hour:Min:Sec)   
+On      On   5v        On    Off    On    10                 On             Mode 2    57600    43.0C     0000:04:40:39              
+
+Input     Edid           HDMIcon     
+01        Default_08     Off         
+02        Default_33     Off         
+03        Default_02     Off         
+04        Default_02     Off         
+
+Output     FromIn     HDMIcon     OutputEn     OSP     OutputScaler     AudioSignal     
+01         02         On          Yes          SNK     Bypass           Bypass          
+02         02         Off         Yes          SNK     Auto             Downmix 2CH     
+
+ARC_Mode     OpticalSel      OpticalEn     OutMode     Audio     
+Source       Downmix 2CH     On            7.1CH       None      
+
+CEC_Control     CEC_Steps     
+On              01            
+
+MultiChannelOutFrom     2ChannelOutFrom     DRC     SurroundDecoder(Upmixer)     SpeakerVirtualizer     
+HDMI/ARC Input          HDMI/ARC Input      Off     On                           On                     
+
+Master Output     Mute     7.1CH Line Group     Downmix Line Group     7.1CH Dante Group     Downmix Dante Group     
+100               Off      On                   On                     On                    On                      
+
+Line Output         Volume     Mute     Delay(Ms)     
+7.1CH Line L        0.0dB      Off      0             
+7.1CH Line R        0.0dB      Off      0             
+7.1CH Line Sub      0.0dB      Off      0             
+7.1CH Line C        0.0dB      Off      0             
+7.1CH Line Ls       0.0dB      Off      0             
+7.1CH Line Rs       0.0dB      Off      0             
+7.1CH Line Lrs      0.0dB      Off      0             
+7.1CH Line Rrs      0.0dB      Off      0             
+Downmix Line L      0.0dB      Off      0             
+Downmix Line R      0.0dB      Off      0             
+
+Dante Output        Volume     Mute     Delay(Ms)     
+7.1CH Dante L       0.0dB      Off      0             
+7.1CH Dante R       0.0dB      Off      0             
+7.1CH Dante Sub     0.0dB      Off      0             
+7.1CH Dante C       0.0dB      Off      0             
+7.1CH Dante Ls      0.0dB      Off      0             
+7.1CH Dante Rs      0.0dB      Off      0             
+7.1CH Dante Lrs     0.0dB      Off      0             
+7.1CH Dante Rrs     0.0dB      Off      0             
+Downmix Dante L     0.0dB      Off      0             
+Downmix Dante R     0.0dB      Off      0             
+
+Dante        IP                  Subnet Mask           Gateway              
+7.1CH        169.254.227.003     255.255.000.000       169.254.000.001      
+2CH          169.254.029.222     255.255.000.000       169.254.000.001      
+
+DHCP         IP                  Subnet Mask           Gateway              
+On           010.010.000.102     255.255.255.000       010.010.000.249      
+(static:     192.168.000.200     255.255.255.000       192.168.000.001)     
+
+Telnet       TCP/IP Port         Mac                   Local                
+0023         8000                34:D0:B8:29:00:48     SW42DA               
+=================================================================================================
+
+SW42DA>

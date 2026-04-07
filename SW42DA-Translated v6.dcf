@@ -1,0 +1,106 @@
+{
+    "deviceConfig": {
+        "tcpAddress": "10.10.0.200",
+        "tcpHandshakeModeHex": false,
+        "tcpHandshakeStages": [
+            {
+                "request": "0D",
+                "responseOK": "\\r\\n"
+            }
+        ],
+        "tcpHandshakeType": "NoHandshake",
+        "tcpKeepConnected": true,
+        "tcpPassword": "",
+        "tcpPort": 8023,
+        "tcpSessionTimeout": 10,
+        "variables": [
+            {
+                "name": "Input1",
+                "pollSeconds": 5,
+                "readOnly": false,
+                "tcpGet": "47,45,54,20,49,4E,50,55,54,31,0D",
+                "tcpMatchFalse": "FALSE",
+                "tcpMatchModeHex": false,
+                "tcpMatchSetOK": "OK",
+                "tcpMatchTrue": "TRUE",
+                "tcpSetFalse": "",
+                "tcpSetTrue": "53,45,54,20,49,4E,50,55,54,31,0D",
+                "timeoutSeconds": 8,
+                "typeAndValue": {
+                    "type": "bool",
+                    "value": false
+                }
+            },
+            {
+                "name": "Input2",
+                "pollSeconds": 6,
+                "readOnly": false,
+                "tcpGet": "47,45,54,20,49,4E,50,55,54,32,0D",
+                "tcpMatchFalse": "FALSE",
+                "tcpMatchModeHex": false,
+                "tcpMatchSetOK": "OK",
+                "tcpMatchTrue": "TRUE",
+                "tcpSetFalse": "",
+                "tcpSetTrue": "53,45,54,20,49,4E,50,55,54,32,0D",
+                "timeoutSeconds": 8,
+                "typeAndValue": {
+                    "type": "bool",
+                    "value": false
+                }
+            },
+            {
+                "name": "Input3",
+                "pollSeconds": 7,
+                "readOnly": false,
+                "tcpGet": "47,45,54,20,49,4E,50,55,54,33,0D",
+                "tcpMatchFalse": "FALSE",
+                "tcpMatchModeHex": false,
+                "tcpMatchSetOK": "OK",
+                "tcpMatchTrue": "TRUE",
+                "tcpSetFalse": "",
+                "tcpSetTrue": "53,45,54,20,49,4E,50,55,54,33,0D",
+                "timeoutSeconds": 8,
+                "typeAndValue": {
+                    "type": "bool",
+                    "value": false
+                }
+            },
+            {
+                "name": "Input4",
+                "pollSeconds": 8,
+                "readOnly": false,
+                "tcpGet": "47,45,54,20,49,4E,50,55,54,34,0D",
+                "tcpMatchFalse": "FALSE",
+                "tcpMatchModeHex": false,
+                "tcpMatchSetOK": "OK",
+                "tcpMatchTrue": "TRUE",
+                "tcpSetFalse": "",
+                "tcpSetTrue": "53,45,54,20,49,4E,50,55,54,34,0D",
+                "timeoutSeconds": 8,
+                "typeAndValue": {
+                    "type": "bool",
+                    "value": false
+                }
+            },
+            {
+                "name": "Power",
+                "pollSeconds": 30,
+                "readOnly": false,
+                "tcpGet": "47,45,54,20,50,4F,57,45,52,0D",
+                "tcpMatchFalse": "FALSE",
+                "tcpMatchModeHex": false,
+                "tcpMatchSetOK": "OK",
+                "tcpMatchTrue": "TRUE",
+                "tcpSetFalse": "53,45,54,20,50,4F,57,45,52,20,4F,46,46,0D",
+                "tcpSetTrue": "53,45,54,20,50,4F,57,45,52,20,4F,4E,0D",
+                "timeoutSeconds": 8,
+                "typeAndValue": {
+                    "type": "bool",
+                    "value": false
+                }
+            }
+        ]
+    },
+    "deviceControlMode": "tcp",
+    "deviceName": "SW42DA-Translation"
+}

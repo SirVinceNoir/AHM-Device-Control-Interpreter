@@ -1,0 +1,33 @@
+# systemd service unit for the AHM64 ↔ SW42DA Translator
+#
+# Installation on Raspberry Pi:
+#   1. Copy this file to /etc/systemd/system/ahm-translator.service
+#   2. Edit the ExecStart path to match where you placed translator.py
+#   3. sudo systemctl daemon-reload
+#   4. sudo systemctl enable ahm-translator   # start on boot
+#   5. sudo systemctl start  ahm-translator   # start now
+#
+# Useful commands:
+#   sudo systemctl status  ahm-translator
+#   sudo journalctl -u ahm-translator -f      # live log
+
+[Unit]
+Description=AHM64 to SW42DA Translation Layer
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=av
+WorkingDirectory=/home/av/ahm-translator
+ExecStart=/usr/bin/python3 /home/av/ahm-translator/translator.py
+Restart=always
+RestartSec=5
+
+# Log to the systemd journal (view with journalctl -u ahm-translator)
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=ahm-translator
+
+[Install]
+WantedBy=multi-user.target
